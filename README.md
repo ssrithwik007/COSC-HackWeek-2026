@@ -1,0 +1,1 @@
+These are my submissions for COSC HackWeek 2026
