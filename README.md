@@ -14,6 +14,8 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 
 ## Live Demo
 
+[Playlist with all demo videos](https://youtube.com/playlist?list=PLFMaSbGdLEvg&si=pBRXxkmvocqMxxk1)
+
 Visit the deployed projects here:
 **https://ssrithwik007.github.io/COSC-HackWeek-2026/**
 
