@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <meta name="theme-color" content="#4f46e5">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="brand-block">
+                <div class="brand-mark">CG</div>
+                <div>
+                    <p class="eyebrow">Student Dashboard</p>
+                    <h1>CGPA Calculator</h1>
+                </div>
+            </div>
+
+            <nav class="topnav" aria-label="Primary">
+                <a href="#semester">Semester GPA</a>
+                <a href="#running">Running CGPA</a>
+                <a href="#whatif">What-If</a>
+                <a href="#stats">Statistics</a>
+            </nav>
+
+            <div class="toolbar">
+                <button id="clearDataBtn" class="danger-button" type="button">Clear All Data</button>
+            </div>
+        </header>
+
+        <main class="content-grid">
+            <section class="hero-card card">
+                <div>
+                    <h2>Modern CGPA planning for every semester.</h2>
+                    <p class="hero-copy">Track semester GPA, save running CGPA, simulate future performance, and review progress in a responsive dashboard.</p>
+                </div>
+
+                <div class="hero-stats" id="heroStats">
+                    <div class="hero-stat">
+                        <span>Semester GPA</span>
+                        <strong id="heroSemesterGpa">0.00</strong>
+                    </div>
+                    <div class="hero-stat">
+                        <span>Running CGPA</span>
+                        <strong id="heroRunningCgpa">0.00</strong>
+                    </div>
+                    <div class="hero-stat">
+                        <span>Projected CGPA</span>
+                        <strong id="heroProjectedCgpa">0.00</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section id="semester" class="card section-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Semester GPA Calculator</p>
+                        <h2>Build the current semester</h2>
+                    </div>
+                    <button id="saveSemesterBtn" class="primary-button" type="button">Save Semester</button>
+                </div>
+
+                <form id="subjectForm" class="subject-form" autocomplete="off">
+                    <label>
+                        <span>Subject Name</span>
+                        <input id="subjectName" name="subjectName" type="text" placeholder="Advanced Programming" required>
+                    </label>
+                    <label>
+                        <span>Credits</span>
+                        <input id="subjectCredits" name="credits" type="number" min="0" step="0.5" placeholder="3" required>
+                    </label>
+                    <label>
+                        <span>Grade</span>
+                        <select id="subjectGrade" name="grade" required></select>
+                    </label>
+                    <div class="form-actions">
+                        <button id="subjectSubmitBtn" class="primary-button" type="submit">Add Subject</button>
+                        <button id="subjectCancelBtn" class="ghost-button hidden" type="button">Cancel Edit</button>
+                    </div>
+                </form>
+
+                <div class="table-shell">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Credits</th>
+                                <th>Grade</th>
+                                <th>Points</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjectTableBody"></tbody>
+                    </table>
+                    <div id="subjectEmptyState" class="empty-state hidden">
+                        <div class="empty-illustration"></div>
+                        <h3>No subjects yet</h3>
+                        <p>Add your first subject to calculate the semester GPA.</p>
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+                    <article class="summary-card">
+                        <span>Total Credits</span>
+                        <strong id="semesterCreditsValue">0.00</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Total Grade Points</span>
+                        <strong id="semesterPointsValue">0.00</strong>
+                    </article>
+                    <article class="summary-card accent">
+                        <span>Semester GPA</span>
+                        <strong id="semesterGpaValue">0.00</strong>
+                    </article>
+                </div>
+            </section>
+
+            <section id="running" class="card section-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Running CGPA</p>
+                        <h2>Saved semesters</h2>
+                    </div>
+                    <div class="inline-metrics">
+                        <div>
+                            <span>Overall CGPA</span>
+                            <strong id="overallCgpaValue">0.00</strong>
+                        </div>
+                        <div>
+                            <span>Total Credits</span>
+                            <strong id="overallCreditsValue">0.00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="semesterList" class="semester-list"></div>
+                <div id="semesterListEmpty" class="empty-state hidden">
+                    <div class="empty-illustration alt"></div>
+                    <h3>No semesters saved</h3>
+                    <p>Save the current semester to begin tracking your running CGPA.</p>
+                </div>
+            </section>
+
+            <section id="whatif" class="card section-card wide-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">What-If CGPA Simulator</p>
+                        <h2>Forecast your final CGPA</h2>
+                    </div>
+                    <button id="addFutureSemesterBtn" class="primary-button" type="button">Add Future Semester</button>
+                </div>
+
+                <div class="simulator-grid">
+                    <label>
+                        <span>Current CGPA</span>
+                        <input id="currentCgpaInput" type="number" min="0" max="10" step="0.01" placeholder="7.80">
+                    </label>
+                    <label>
+                        <span>Completed Credits</span>
+                        <input id="completedCreditsInput" type="number" min="0" step="0.5" placeholder="72">
+                    </label>
+                    <article class="projection-card">
+                        <span>Projected CGPA</span>
+                        <strong id="projectedCgpaValue">0.00</strong>
+                        <p id="projectionDelta">No projection yet</p>
+                    </article>
+                </div>
+
+                <div id="futureSemesterList" class="future-semester-list"></div>
+                <div id="futureSemesterEmpty" class="empty-state hidden">
+                    <div class="empty-illustration future"></div>
+                    <h3>No future semesters added</h3>
+                    <p>Add a future semester to simulate grades and project your final CGPA.</p>
+                </div>
+            </section>
+
+            <section id="stats" class="card section-card wide-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Statistics Dashboard</p>
+                        <h2>Performance summary</h2>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="summary-card">
+                        <span>Current CGPA</span>
+                        <strong id="statsCurrentCgpa">0.00</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Highest Semester GPA</span>
+                        <strong id="statsHighestGpa">0.00</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Lowest Semester GPA</span>
+                        <strong id="statsLowestGpa">0.00</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Total Credits</span>
+                        <strong id="statsTotalCredits">0.00</strong>
+                    </article>
+                    <article class="summary-card">
+                        <span>Completed Semesters</span>
+                        <strong id="statsSemesters">0</strong>
+                    </article>
+                    <article class="summary-card accent">
+                        <span>Graduation Progress</span>
+                        <strong id="statsProgress">0%</strong>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <button id="fabAddSubject" class="fab" type="button" aria-label="Add subject">+</button>
+        <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
