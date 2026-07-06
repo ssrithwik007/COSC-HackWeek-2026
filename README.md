@@ -7,6 +7,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | Project                        | Description                                                                  |
 | ------------------------------ | ---------------------------------------------------------------------------- |
 | CGPA Calculator                | A GPA/CGPA calculator with semester tracking and a "What-If" CGPA simulator. |
+| Kanban Board               | A Trello style kanban board with draggable cards and persistent storage using localStorage. |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
@@ -20,6 +21,7 @@ Visit the deployed projects here:
 .
 ├── index.html                 # Landing page
 ├── CGPA Calculator/
+├── Kanban Board/
 ├── ...
 └── README.md
 ```
@@ -29,3 +31,4 @@ Visit the deployed projects here:
 * HTML5
 * CSS3
 * JavaScript (ES6)
+* React.js
