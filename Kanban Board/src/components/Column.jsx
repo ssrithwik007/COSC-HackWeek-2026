@@ -1,7 +1,8 @@
 import Card from "./Card";
 import { Plus } from "lucide-react";
+import { useDroppable } from '@dnd-kit/core'
 
-export default function Column({onAddTask, title, color, tasks, onDeleteTask, onDragStart, onDrop, onCardDrop }) {
+export default function Column({onAddTask, title, color, tasks, onDeleteTask, draggable = true }) {
 
     const bgMap = {
         backlog: "bg-backlog",
@@ -9,6 +10,8 @@ export default function Column({onAddTask, title, color, tasks, onDeleteTask, on
         inprogress: "bg-inprogress",
         done: "bg-done"
     };
+
+    const { setNodeRef, isOver } = useDroppable({ id: `column-${color}` })
 
     return (
         <div className="flex flex-col gap-4">
@@ -26,11 +29,11 @@ export default function Column({onAddTask, title, color, tasks, onDeleteTask, on
                 <button onClick={onAddTask}> <Plus size={28}/> </button>
             </div>
 
-            <div className={`flex-1 overflow-y-auto rounded-3xl border-2 border-black p-3 ${bgMap[color]} flex flex-col gap-3`}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={() => onDrop(color)}
+            {/** droppable container for dnd-kit **/}
+            <div
+                ref={setNodeRef}
+                className={`flex-1 overflow-y-auto rounded-3xl border-2 border-black p-3 ${bgMap[color]} flex flex-col gap-3 ${isOver ? 'ring-4 ring-offset-2 ring-black/20' : ''}`}
             >
-
                 {tasks.length === 0 ? (
                     <div className="text-center opacity-50 mt-10">
                         No Tasks
@@ -39,13 +42,13 @@ export default function Column({onAddTask, title, color, tasks, onDeleteTask, on
                     tasks.map((task, index) => (
                         <Card
                             key={task.id}
+                            id={task.id}
                             taskName={task.title}
                             description={task.description}
                             priority={task.priority}
                             createdAt={task.createdAt}
                             onDelete={() => onDeleteTask(color, task.id)}
-                            onDragStart={() => onDragStart(task, color, index)}
-                            onDropCard={() => onCardDrop(color, index)}
+                            draggable={draggable}
                         />
                     ))
                 )}

@@ -1,24 +1,37 @@
 import { Trash2 } from "lucide-react";
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
-export default function Card({taskName, description, createdAt, priority, onDelete, onDragStart, onDragOver, onDropCard}){
+export default function Card({id, taskName, description, createdAt, priority, onDelete, draggable = true}){
+        let attributes = {}
+        let listeners = {}
+        let setNodeRef = () => {}
+        let style = {}
+
+        if (draggable) {
+            const sortable = useSortable({ id })
+            attributes = sortable.attributes
+            listeners = sortable.listeners
+            setNodeRef = sortable.setNodeRef
+            const transform = sortable.transform
+            const transition = sortable.transition
+            style = {
+                transform: CSS.Transform.toString(transform),
+                transition,
+            }
+        }
     const priorityBgMap = {
         "low": "bg-done",
         "medium": "bg-inprogress",
         "high": "bg-backlog"
     }
     return (
-        <div 
-            draggable 
-            onDragStart={onDragStart} 
-            onDragOver={(e) => {
-                e.preventDefault();
-                onDragOver?.(e);
-            }}
-            onDrop={(e) => {
-                e.stopPropagation();
-                onDropCard?.();
-            }}
-            className="rounded-xl bg-card-bg p-4 shadow"
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            className="rounded-xl bg-card-bg p-4 shadow hover:shadow-lg transform-gpu hover:-translate-y-[5px]"
         >
             <div className="flex flex-col gap-4">
                 <div>
@@ -26,7 +39,12 @@ export default function Card({taskName, description, createdAt, priority, onDele
                         <h2 className="text-lg font-semibold text-text">
                             {taskName}
                         </h2>
-                        <button onClick={onDelete}>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); onDelete?.(); }}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onPointerUp={(e) => e.stopPropagation()}
+                            aria-label="Delete task"
+                        >
                             <Trash2 size={22}></Trash2>
                         </button>
                     </div>
