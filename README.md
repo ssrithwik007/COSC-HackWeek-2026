@@ -29,7 +29,3 @@ Visit the deployed projects here:
 * HTML5
 * CSS3
 * JavaScript (ES6)
-
-## License
-
-This repository is intended for educational and learning purposes as part of **COSC HackWeek 2026**.
