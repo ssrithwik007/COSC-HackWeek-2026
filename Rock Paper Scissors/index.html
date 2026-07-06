@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Rock Paper Scissors</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<main class="app-shell">
+		<section class="game-card" aria-labelledby="game-title">
+			<header class="hero">
+				<p class="eyebrow">Player vs Computer</p>
+				<h1 id="game-title">Rock Paper Scissors</h1>
+			</header>
+
+			<section class="scoreboard" aria-label="Scoreboard">
+				<article class="score-box">
+					<span class="score-label">Player</span>
+					<strong id="player-score">0</strong>
+				</article>
+				<article class="score-box">
+					<span class="score-label">Computer</span>
+					<strong id="computer-score">0</strong>
+				</article>
+			</section>
+
+			<section class="choices" aria-label="Choose your move">
+				<button class="choice-btn" data-choice="rock" aria-label="Choose Rock">
+					<span class="emoji">🪨</span>
+					<span>Rock</span>
+				</button>
+				<button class="choice-btn" data-choice="paper" aria-label="Choose Paper">
+					<span class="emoji">📄</span>
+					<span>Paper</span>
+				</button>
+				<button class="choice-btn" data-choice="scissors" aria-label="Choose Scissors">
+					<span class="emoji">✂️</span>
+					<span>Scissors</span>
+				</button>
+			</section>
+
+			<section class="result-panel" aria-live="polite" aria-atomic="true">
+				<p class="status" id="round-status">Make your move to begin.</p>
+				<div class="choices-display">
+					<div class="choice-display">
+						<span class="choice-title">Your choice</span>
+						<strong id="player-choice">-</strong>
+					</div>
+					<div class="choice-display">
+						<span class="choice-title">Computer choice</span>
+						<strong id="computer-choice">-</strong>
+					</div>
+				</div>
+			</section>
+
+			<footer class="actions">
+				<button id="reset-game" class="reset-btn" type="button">Reset Game</button>
+				<p id="win-message" class="win-message">Play as many rounds as you want.</p>
+			</footer>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
