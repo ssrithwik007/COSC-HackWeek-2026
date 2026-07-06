@@ -9,6 +9,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | CGPA Calculator                | A GPA/CGPA calculator with semester tracking and a "What-If" CGPA simulator. |
 | Kanban Board               | A Trello style kanban board with draggable cards and persistent storage using localStorage. |
 | Rock Paper Scissors               | A simple Rock Paper Scissors game using JavaScript.  |
+| Sound Board              | A funny browser soundboard with 16 sounds, a volume slider, and a stop all button. |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
@@ -24,6 +25,7 @@ Visit the deployed projects here:
 ├── CGPA Calculator/
 ├── Kanban Board/
 ├── Rock Paper Scissors/
+├── Sound Board/
 ├── ...
 └── README.md
 ```

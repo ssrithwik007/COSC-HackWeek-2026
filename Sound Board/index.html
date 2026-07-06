@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Board</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #F2E2B1;
+            --color-text: #000000;
+            --color-text-h: #08060d;
+            --color-border: #000000;
+            --color-red: #EB5353;
+            --color-blue: #4D96FF;
+            --color-orange: #FFA239;
+            --color-green: #6BCB77;
+            --color-card-bg: #F0E4D3;
+        }
+
+        .slider {
+            @apply w-full bg-transparent appearance-none cursor-pointer;
+        }
+
+        .slider::-webkit-slider-runnable-track {
+            height: 3px;
+            background: black;
+            border-radius: 999px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: black;
+            border-radius: 999px;
+            margin-top: -6px;
+            cursor: pointer;
+            transition: transform .2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* Firefox */
+
+        .slider::-moz-range-track {
+            height: 3px;
+            background: black;
+            border-radius: 999px;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border: none;
+            background: black;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-bg min-h-screen px-16 py-10">
+
+    <header class="flex justify-between items-center">
+        <h1 class="text-6xl font-bold tracking-wide">
+            SOUND BOARD
+        </h1>
+
+        <div class="flex items-center gap-3">
+            <div class="border-2 border-black bg-card-bg rounded-2xl px-4 py-2 w-64">
+                <p id="volText" class="text-gray-500">Volume:</p>
+                <input
+                    id="volume"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="0.5"
+                    class="slider w-full"
+                >
+            </div>
+
+            <button
+                id="stopBtn"
+                class="bg-black text-white rounded-2xl px-6 py-4 w-40 h-16"
+            >
+                Stop playing
+            </button>
+        </div>
+    </header>
+
+    <main
+        id="board"
+        class="grid grid-cols-4 gap-8 mt-16"
+    >
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
