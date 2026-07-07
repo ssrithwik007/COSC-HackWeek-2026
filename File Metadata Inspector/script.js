@@ -4,10 +4,6 @@ const fileInput = document.getElementById("fileInput");
 const preview = document.getElementById("preview");
 const metadata = document.getElementById("metadata");
 
-browseBtn.addEventListener("click", () => {
-    fileInput.click();
-});
-
 dropZone.addEventListener("click", () => {
     fileInput.click();
 });
