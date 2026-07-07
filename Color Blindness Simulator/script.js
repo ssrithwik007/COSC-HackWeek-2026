@@ -265,7 +265,6 @@ Object.entries(blindnessBtns).forEach(([type, button]) => {
         button.addEventListener("click", () => {
             blindnessBtns[selectedBlindness].classList.remove("border-text");
             selectedBlindness = type;
-            console.log(selectedBlindness);
             blindnessBtns[selectedBlindness].classList.add("border-text");
             imageHeading.innerHTML=selectedBlindness;
             if(uploadedImage){
@@ -328,7 +327,6 @@ function simulate(type){
     const pixels = imageData.data;
     const severity = Number(severitySlider.value); // 0-10
     const m = matrices[type][severity];
-    console.log(m);
 
     for (let i = 0; i < pixels.length; i += 4) {
         let r = pixels[i];
@@ -344,7 +342,6 @@ function simulate(type){
         pixels[i + 2] = clamp(nb);
 
     }
-    console.log(imageData);
     simulatedCtx.putImageData(imageData, 0, 0);
 
     colorBlind.innerHTML = "";
@@ -359,8 +356,6 @@ function handleFileUpload(file) {
     image.src = URL.createObjectURL(file);
 
     image.onload = () => {
-        console.log("Image loaded");
-        console.log(image.naturalWidth, image.naturalHeight);
         uploadedImage = image;
         originalCanvas  = document.createElement("canvas");
         originalCtx = originalCanvas.getContext("2d");
@@ -368,7 +363,6 @@ function handleFileUpload(file) {
         originalCanvas.height = image.naturalHeight;
         originalCanvas.classList.add("w-full", "h-auto", "object-contain", "rounded-3xl");
         originalCtx.drawImage(image, 0, 0);
-        console.log(originalCtx.getImageData(0, 0, originalCanvas.width, originalCanvas.height));
         original.appendChild(originalCanvas);
         simulate(selectedBlindness);
         URL.revokeObjectURL(image.src);
@@ -398,7 +392,6 @@ dropZone.addEventListener("drop", (event) => {
     event.preventDefault();
     dropZone.classList.remove("border-text");
     const file = event.dataTransfer.files[0];
-    console.log(file);
     if (!file) return;
     handleFileUpload(file);
 });
