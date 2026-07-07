@@ -286,8 +286,8 @@ severitySlider.addEventListener("input", () => {
 resetBtn.addEventListener("click", () => {
     uploadedImage = null;
 
-    original.innerHTML = "";
-    colorBlind.innerHTML = "";
+    original.innerHTML = "<p class='text-xl text-slate-500'>Upload an Image</p>";
+    colorBlind.innerHTML = "<p class='text-xl text-slate-500'>Upload an Image</p>";
 
     fileInput.value = ""; 
 
