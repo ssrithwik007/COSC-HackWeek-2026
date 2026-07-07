@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Streak Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Habit Streak Tracker</h1>
+    </header>
+    
+    <main class="container">
+        <section class="dashboard">
+            <div class="stat-card">
+                <h3>Total Habits</h3>
+                <p id="total-habits">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Completed Today</h3>
+                <p id="completed-today">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Longest Current Streak</h3>
+                <p id="longest-streak">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Longest Streak All-Time</h3>
+                <p id="longest-all-time">0</p>
+            </div>
+        </section>
+
+        <section class="add-habit-section">
+            <form id="add-habit-form">
+                <input type="text" id="habit-name-input" placeholder="Enter new habit..." required>
+                <button type="submit">Add Habit</button>
+            </form>
+        </section>
+
+        <section id="habits-container" class="habits-container">
+            <!-- Habit cards will be generated here -->
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

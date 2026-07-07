@@ -11,6 +11,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | Rock Paper Scissors               | A simple Rock Paper Scissors game using JavaScript.  |
 | Sound Board              | A funny browser soundboard with 16 sounds, a volume slider, and a stop all button. |
 | File Metadata Inspector              | A web application that extracts and displays metadata from uploaded files. |
+| Habit Streak Tracker              | A habit tracker where users can add habits, mark daily progress, and maintain streaks. |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
@@ -30,6 +31,7 @@ Visit the deployed projects here:
 ├── Rock Paper Scissors/
 ├── Sound Board/
 ├── File Metadata Inspector/
+├── Habit Streak Tracker/
 ├── ...
 └── README.md
 ```
