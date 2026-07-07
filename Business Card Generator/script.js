@@ -101,9 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.title.textContent = currentData.jobTitle;
         preview.company.textContent = currentData.company;
         
-        preview.phone.textContent = currentData.phone;
-        preview.email.textContent = currentData.email;
-        preview.website.textContent = currentData.website;
+        preview.phone.textContent = currentData.phone ? 'Phone' : '';
+        preview.email.textContent = currentData.email ? 'Email' : '';
+        preview.website.textContent = currentData.website ? 'Website' : '';
 
         // Visibility
         preview.linkPhone.classList.toggle('hidden', !currentData.phone);
@@ -134,7 +134,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Appearance
         preview.card.className = `card ${currentData.template}`;
         preview.card.style.setProperty('--accent-color', currentData.accentColor);
+        // Explicitly set it globally for html2canvas dom-cloning reliability
+        document.documentElement.style.setProperty('--accent-color', currentData.accentColor);
         colorHex.textContent = currentData.accentColor.toUpperCase();
+
+        // Specific gradient rendering overrides to bypass html2canvas var() limitations
+        const cardBg = preview.card.querySelector('.card-bg');
+        if (cardBg) {
+            if (currentData.template === 'template-glass') cardBg.style.background = `linear-gradient(135deg, ${currentData.accentColor} 0%, rgba(200, 200, 200, 0.2) 100%)`;
+            else if (currentData.template === 'template-gradient') cardBg.style.background = `linear-gradient(135deg, ${currentData.accentColor} 0%, #1e293b 100%)`;
+            else if (currentData.template === 'template-neon') cardBg.style.background = `radial-gradient(circle at 100% 0%, ${currentData.accentColor} 0%, transparent 40%)`;
+            else cardBg.style.background = '';
+        }
 
         // QR Code Updates
         let qrValue = currentData.website || currentData.email || 'https://example.com';
@@ -190,7 +201,19 @@ document.addEventListener("DOMContentLoaded", () => {
         btnPng.innerHTML = "Generating...";
         prepareForRender();
         try {
-            const canvas = await html2canvas(preview.card, { scale: 4, useCORS: true, allowTaint: true, logging: false });
+            const canvas = await html2canvas(preview.card, { 
+                scale: 4, 
+                width: 700,
+                height: 400,
+                windowWidth: 700,
+                useCORS: true, 
+                allowTaint: true, 
+                logging: false,
+                onclone: (doc) => {
+                    const clonedContainer = doc.querySelector('.preview-container');
+                    if (clonedContainer) clonedContainer.style.transform = 'none';
+                }
+            });
             const link = document.createElement('a');
             link.download = 'business_card.png';
             link.href = canvas.toDataURL('image/png');
@@ -207,7 +230,19 @@ document.addEventListener("DOMContentLoaded", () => {
         btnPdf.innerHTML = "Generating...";
         prepareForRender();
         try {
-            const canvas = await html2canvas(preview.card, { scale: 4, useCORS: true, allowTaint: true, logging: false });
+            const canvas = await html2canvas(preview.card, { 
+                scale: 4, 
+                width: 700,
+                height: 400,
+                windowWidth: 700,
+                useCORS: true, 
+                allowTaint: true, 
+                logging: false,
+                onclone: (doc) => {
+                    const clonedContainer = doc.querySelector('.preview-container');
+                    if (clonedContainer) clonedContainer.style.transform = 'none';
+                }
+            });
             const imgData = canvas.toDataURL('image/png');
             
             // Standard business card is 3.5 x 2 inches
