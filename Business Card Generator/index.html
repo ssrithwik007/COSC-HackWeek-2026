@@ -1,13 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>business-card-generator</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Business Card Generator</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Panel: Form -->
+        <aside class="editor-panel">
+            <header>
+                <h1>Card Generator</h1>
+                <p>Create your custom digital business card.</p>
+            </header>
+            
+            <form id="card-form">
+                <!-- Personal Info -->
+                <div class="form-section">
+                    <h3>Personal Intro</h3>
+                    <div class="input-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Maximus Decimus Meridius" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Graphic Designer">
+                    </div>
+                    <div class="input-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" placeholder="Example Business Pvt. Ltd.">
+                    </div>
+                    <div class="input-group">
+                        <label for="profilePic">Profile Picture</label>
+                        <input type="file" id="profilePic" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- Contact & Socials -->
+                <div class="form-section">
+                    <h3>Contact & Links</h3>
+                    <div class="input-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+91 xxxxxxxxxx">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="maximus@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="website">Website</label>
+                        <input type="url" id="website" placeholder="https://example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="linkedin">LinkedIn URL</label>
+                        <input type="url" id="linkedin" placeholder="https://linkedin.com/in/example">
+                    </div>
+                    <div class="input-group">
+                        <label for="github">GitHub URL</label>
+                        <input type="url" id="github" placeholder="https://github.com/example">
+                    </div>
+                    <div class="input-group">
+                        <label for="twitter">Twitter/X URL</label>
+                        <input type="url" id="twitter" placeholder="https://twitter.com/example">
+                    </div>
+                    <div class="input-group">
+                        <label for="instagram">Instagram URL</label>
+                        <input type="url" id="instagram" placeholder="https://instagram.com/example">
+                    </div>
+                </div>
+
+                <!-- Aesthetics -->
+                <div class="form-section">
+                    <h3>Design</h3>
+                    <div class="input-group">
+                        <label>Template</label>
+                        <select id="templateSelector">
+                            <option value="template-minimal">Modern Minimal</option>
+                            <option value="template-glass">Glassmorphism</option>
+                            <option value="template-gradient">Creative Gradient</option>
+                            <option value="template-corporate">Corporate Professional</option>
+                            <option value="template-neon">Dark Neon</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="accentColor">Accent Color</label>
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="accentColor" value="#3B82F6">
+                            <span id="colorHex">#3B82F6</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </aside>
+
+        <!-- Right Panel: Preview -->
+        <main class="preview-panel">
+            <div class="preview-container">
+                <!-- The Business Card (700x400) -->
+                <div id="card-preview" class="card template-minimal" style="--accent-color: #3B82F6;">
+                    
+                    <!-- Background / Decor Elements -->
+                    <div class="card-bg"></div>
+                    <div class="card-accent-strip"></div>
+                    
+                    <div class="card-content">
+                        <!-- Profile Image -->
+                        <div class="card-avatar">
+                            <img id="preview-img" src="https://ui-avatars.com/api/?name=User&background=E5E7EB&color=9CA3AF&size=300" alt="Profile">
+                        </div>
+                        
+                        <div class="card-info">
+                            <!-- Header / Name -->
+                            <div class="card-header">
+                                <h2 id="preview-name">Maximus Decimus Meridius</h2>
+                                <h3 id="preview-title">Graphic Designer</h3>
+                                <h4 id="preview-company">Example Business Pvt. Ltd.</h4>
+                            </div>
+                            
+                            <!-- Info / Links -->
+                            <div class="card-body">
+                                <div class="contact-list">
+                                    <a id="link-phone" class="contact-item hidden" target="_blank">
+                                        <i data-lucide="phone"></i>
+                                        <span id="preview-phone"></span>
+                                    </a>
+                                    <a id="link-email" class="contact-item hidden" target="_blank">
+                                        <i data-lucide="mail"></i>
+                                        <span id="preview-email"></span>
+                                    </a>
+                                    <a id="link-website" class="contact-item hidden" target="_blank">
+                                        <i data-lucide="globe"></i>
+                                        <span id="preview-website"></span>
+                                    </a>
+                                </div>
+                                
+                                <div class="social-list">
+                                    <a id="link-linkedin" class="social-item hidden" target="_blank">
+                                        <i data-lucide="linkedin"></i>
+                                    </a>
+                                    <a id="link-github" class="social-item hidden" target="_blank">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                    <a id="link-twitter" class="social-item hidden" target="_blank">
+                                        <i data-lucide="twitter"></i>
+                                    </a>
+                                    <a id="link-instagram" class="social-item hidden" target="_blank">
+                                        <i data-lucide="instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- QR Code -->
+                        <div class="card-qr">
+                            <canvas id="qr-code"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Moved Actions -->
+            <div class="actions">
+                <button type="button" id="btn-png" class="btn primary">
+                    <i data-lucide="image"></i> Download PNG
+                </button>
+                <button type="button" id="btn-pdf" class="btn secondary">
+                    <i data-lucide="file-text"></i> Download PDF
+                </button>
+                <button type="button" id="btn-reset" class="btn danger outline">
+                    Reset
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+</body>
 </html>
