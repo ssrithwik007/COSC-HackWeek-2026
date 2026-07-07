@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Blindness Simulator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-primary: #C65D3B;
+            --color-secondary: #E6A157;
+            --color-accent: #6D9773;
+            --color-bg: #FAF6F0;
+            --color-card-light: #FFFDF9;
+            --color-card-dark: #E9DDD0;
+            --color-text: #3B2F2F;
+            --color-border-light: #E9DDD0;
+            --color-border-dark: #3B2F2F;
+            --font-sans: "Intel One Mono", monospace, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-bg px-4 sm:px-6 lg:px-12 xl:px-20">
+    <header class="md:sticky md:top-0 bg-bg  flex flex-col md:flex-row items-center justify-between gap-4 py-4">
+        <h1 class="text-3xl text-text">
+            Colour Blind Simulator
+        </h1>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-medium text-text">Severity</span>
+                <input id="severitySlider" type="range" min="0" max="10" value="10" step="1" class="w-28 sm:w-40 accent-primary cursor-pointer">
+                <span id="severityValue" class="w-10 text-center text-sm font-semibold text-text">
+                    100%
+                </span>
+            </div>
+
+            <button
+                id="resetBtn"
+                class="bg-text text-bg px-10 py-2 rounded-full hover:opacity-90 transition"
+            >
+                Reset
+            </button>
+        </div>
+    </header>
+
+    <div id="dropZone" class="cursor-pointer transition-all duration-300 border-2 border-dashed border-border-light rounded-3xl bg-card hover:shadow-2xl hover:border-border-dark p-5 flex flex-col items-center justify-center gap-2 mb-3">
+        <h2 class="text-xl font-semibold text-text text-center">
+            Drop an Image or
+        </h2>
+        <button id="browseBtn" class=" cursor-pointer bg-primary text-text px-6 py-3 rounded-xl hover:bg-secondary transition font-semibold shadow">
+            Browse Files
+        </button>
+        <p class="text-md text-slate-500">
+            Upload Image files only*
+        </p>
+
+        <input
+            type="file"
+            id="fileInput"
+            class="hidden"
+            accept="image/*"
+        />
+    </div>
+
+    <div class="w-full bg-card-bg border-2 border-solid border-border-light rounded-3xl pt-5 mb-5 px-4 md:px-8 lg:px-12 [&:empty]:min-h-[550px]">
+        <div class="flex flex-wrap justify-center lg:justify-between gap-4 mb-3">
+            <button id="protanopiaBtn" class="bg-primary border-2 border-border-light text-text px-6 sm:px-10 py-2 rounded-full hover:bg-secondary transition font-semibold shadow">
+                Protanopia
+            </button>
+            <button id="deuteranopiaBtn" class="bg-primary border-2 border-border-light text-text px-6 sm:px-10 py-2 rounded-full hover:bg-secondary transition font-semibold shadow">
+                Deuteranopia
+            </button>
+            <button id="tritanopiaBtn" class="bg-primary border-2 border-border-light text-text px-6 sm:px-10 py-2 rounded-full hover:bg-secondary transition font-semibold shadow">
+                Tritanopia
+            </button>
+            <button id="achromatopsiaBtn" class="bg-primary border-2 border-border-light text-text px-6 sm:px-10 py-2 rounded-full hover:bg-secondary transition font-semibold shadow">
+                Achromatopsia
+            </button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+            <div class="w-full lg:flex-1 min-h-[450px] bg-border-light border-2 border-text flex flex-col items-center gap-3
+            rounded-3xl pt-3">
+                <div class="bg-text text-bg px-10 p-3 rounded-full">
+                    Original
+                </div>
+                <div id="original" class="px-2 pb-2 w-full place-items-center justify-items-center">
+
+                </div>
+            </div>
+            <div class="w-full lg:flex-1 min-h-[450px] bg-border-light border-2 border-text flex flex-col items-center gap-3
+            rounded-3xl pt-3">
+                <div id="imageHeading" class="bg-text text-bg px-10 py-3 rounded-full">
+                    colorBlind
+                </div>
+                <div id="colorBlind" class="px-2 pb-2 w-full place-items-center justify-items-center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

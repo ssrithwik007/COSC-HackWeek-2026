@@ -13,6 +13,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | File Metadata Inspector              | A web application that extracts and displays metadata from uploaded files. |
 | Habit Streak Tracker              | A habit tracker where users can add habits, mark daily progress, and maintain streaks. |
 | Business Card Generator              | An application where users enter their details and generate a digital business card. |
+| Color Blindness Simulator             | An application which simulates 4 types of color blindness for an uploaded image. |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
