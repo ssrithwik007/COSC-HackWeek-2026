@@ -82,11 +82,13 @@ with left:
         language="python",
         theme="tomorrow_night_eighties",
         height=500,
-        auto_update=True,
-        wrap=True
+        auto_update=False,
+        wrap=True,
+        key="editor",
     )
 
-    st.session_state.code = code
+    if code is not None:
+        st.session_state.code = code
 
 with right:
 
@@ -97,7 +99,8 @@ with right:
             st.session_state.output,
             language="text", 
             height=500,
-            line_numbers=True
+            line_numbers=True,
+            wrap_lines=True
         )
 
 if run:
@@ -116,7 +119,7 @@ if run:
 
     except KIWError as e:
 
-        st.error(str(e))
+        st.session_state.output = e
 
     except Exception as e:
 
