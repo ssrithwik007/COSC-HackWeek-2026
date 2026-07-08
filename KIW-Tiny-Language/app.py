@@ -1,6 +1,4 @@
 import streamlit as st
-from streamlit_ace import st_ace
-from pathlib import Path
 
 from kiwti import KIWTI
 from errors import KIWError
@@ -21,7 +19,7 @@ if "output" not in st.session_state:
     st.session_state.output = ""
 
 with st.sidebar:
-    st.header("Examples")
+    st.header("Load Program")
 
     uploaded_file = st.file_uploader(
         "Choose a .kiw file",
@@ -35,8 +33,8 @@ with st.sidebar:
 
     st.header("Syntax")
 
-    st.code("""
-new x = 5
+    st.code(
+"""new x = 5
 
 say x
 
@@ -50,9 +48,11 @@ repeat x > 0 =>
     say x
     x = x - 1
 end
-""", language="text")
-    
-run_col, clear_col, download_col, empty = st.columns([1, 1, 1, 6])
+""",
+        language="text"
+    )
+
+run_col, clear_col, download_col, _ = st.columns([1, 1, 1, 6])
 
 with run_col:
     run = st.button("Run", use_container_width=True)
@@ -66,67 +66,49 @@ with clear_col:
 with download_col:
     st.download_button(
         "Download",
-        st.session_state.code,
+        data=st.session_state.code,
         file_name="program.kiw",
         mime="text/plain",
         use_container_width=True
     )
 
-left, right = st.columns([1, 1])
+left, right = st.columns(2)
 
 with left:
-
     st.subheader("Editor")
-    code = st_ace(
+
+    st.session_state.code = st.text_area(
+        "KIW Code",
         value=st.session_state.code,
-        language="python",
-        theme="tomorrow_night_eighties",
         height=500,
-        auto_update=False,
-        wrap=True,
-        key="editor",
+        label_visibility="collapsed"
     )
 
-    if code is not None:
-        st.session_state.code = code
-
 with right:
-
     st.subheader("Console")
 
-    if st.session_state.output:
-        st.code(
-            st.session_state.output,
-            language="text", 
-            height=500,
-            line_numbers=True,
-            wrap_lines=True
-        )
+    st.code(
+        st.session_state.output,
+        language="text",
+        line_numbers=True,
+        wrap_lines=True,
+        height=500
+    )
 
 if run:
-
     interpreter = KIWTI()
 
     try:
-
-        output = interpreter.run(
-            st.session_state.code
-        )
-
-        st.session_state.output = output
-
-        st.rerun()
+        st.session_state.output = interpreter.run(st.session_state.code)
 
     except KIWError as e:
-
-        st.session_state.output = e
+        st.session_state.output = str(e)
 
     except Exception as e:
+        st.session_state.output = str(e)
 
-        st.exception(e)
+    st.rerun()
 
 st.divider()
 
-st.caption(
-    "KIW Tiny Language • KIWTI Interpreter • Version 1.0"
-)
+st.caption("KIW Tiny Language • KIWTI Interpreter • Version 1.0")
