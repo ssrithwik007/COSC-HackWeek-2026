@@ -23,25 +23,13 @@ if "output" not in st.session_state:
 with st.sidebar:
     st.header("Examples")
 
-    examples_dir = Path("examples")
-
-    examples = {}
-
-    if examples_dir.exists():
-        for file in examples_dir.glob("*.kiw"):
-            examples[file.stem] = file
-
-    selected = st.selectbox(
-        "Load Example",
-        ["None"] + list(examples.keys())
+    uploaded_file = st.file_uploader(
+        "Choose a .kiw file",
+        type=["kiw"]
     )
 
-    if st.button("Load Example"):
-
-        if selected != "None":
-            st.session_state.code = examples[selected].read_text(
-                encoding="utf-8"
-            )
+    if uploaded_file is not None:
+        st.session_state.code = uploaded_file.read().decode("utf-8")
 
     st.divider()
 
