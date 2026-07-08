@@ -16,6 +16,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | Color Blindness Simulator             | An application which simulates 4 types of color blindness for an uploaded image. |
 | [Tea Time With Ollama](https://github.com/ssrithwik007/Tea-Time-With-Ollama)             | A chat application that interacts with a local Ollama model. |
 | [PASS](https://github.com/ssrithwik007/PASS)             | A security tool that scans files or GitHub repositories to detect accidentally exposed sensitive information such as API keys, passwords, tokens, and secret credentials.  |
+| KIW Tiny Language             | A simple programming language with variables, loops, conditions, and an interpreter |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
@@ -36,6 +37,7 @@ Visit the deployed projects here:
 ├── Sound Board/
 ├── File Metadata Inspector/
 ├── Habit Streak Tracker/
+├── KIW Tiny Language/
 ├── ...
 └── README.md
 ```
