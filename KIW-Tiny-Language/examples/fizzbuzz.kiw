@@ -1,0 +1,21 @@
+new i = 1
+
+repeat i <= 100 =>
+
+    check i % 15 == 0 =>
+        say "FizzBuzz"
+    otherwise =>
+        check i % 3 == 0 =>
+            say "Fizz"
+        otherwise =>
+            check i % 5 == 0 =>
+                say "Buzz"
+            otherwise =>
+                say i
+            end
+        end
+    end
+
+    i = i + 1
+
+end

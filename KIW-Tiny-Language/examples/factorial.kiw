@@ -1,0 +1,9 @@
+new n = 5
+new result = 1
+
+repeat n > 1 =>
+    result = result * n
+    n = n - 1
+end
+
+say result
