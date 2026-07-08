@@ -15,6 +15,7 @@ A collection of my submissions for **COSC HackWeek 2026**. This repository conta
 | Business Card Generator              | An application where users enter their details and generate a digital business card. |
 | Color Blindness Simulator             | An application which simulates 4 types of color blindness for an uploaded image. |
 | [Tea Time With Ollama](https://github.com/ssrithwik007/Tea-Time-With-Ollama)             | A chat application that interacts with a local Ollama model. |
+| [PASS](https://github.com/ssrithwik007/PASS)             | A security tool that scans files or GitHub repositories to detect accidentally exposed sensitive information such as API keys, passwords, tokens, and secret credentials.  |
 | *More projects coming soon...* | Additional HackWeek submissions will be added as they are completed.         |
 
 ## Live Demo
